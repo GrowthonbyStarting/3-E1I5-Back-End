@@ -14,7 +14,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - DATABASE_URL="mysql://root:1234@localhost:3306/e1i5"
+      - DATABASE_URL=mysql://root:1234@localhost:3306/e1i5
     ports:
       - "3000:3000"
     restart: always
