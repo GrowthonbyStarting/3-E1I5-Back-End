@@ -2,5 +2,5 @@
 
 ```bash
 # development
-$ docker compose up api
+$ docker compose up --build api
 ```
