@@ -7,8 +7,10 @@ module.exports = {
   },
   plugins: ['@typescript-eslint/eslint-plugin'],
   extends: [
+    'airbnb-base',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
+    'plugin:import/typescript',
   ],
   root: true,
   env: {
@@ -21,5 +23,22 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off',
+    'no-useless-constructor': 'off',
+    'max-classes-per-file': 'off',
+    'no-shadow': 'off',
+    'prettier/prettier': 'error',
+    'no-param-reassign': 'off',
+    'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.spec.*', '**/*.test.*'] }],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': [
+      'error',
+      { typedefs: false, functions: false, classes: false, variables: true },
+    ],
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    'no-restricted-syntax': ['error', 'WithStatement'],
   },
 };
