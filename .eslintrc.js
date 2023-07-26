@@ -32,6 +32,7 @@ module.exports = {
     'no-shadow': 'off',
     'prettier/prettier': 'error',
     'no-param-reassign': 'off',
+    'prefer-destructuring': 'warn',
     'import/no-extraneous-dependencies': ['error', { devDependencies: ['**/*.spec.*', '**/*.test.*'] }],
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': [
