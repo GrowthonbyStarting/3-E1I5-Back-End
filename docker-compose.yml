@@ -1,4 +1,4 @@
-version: "1.0"
+version: '1.0'
 services:
   db:
     image: mysql
@@ -6,7 +6,7 @@ services:
       MYSQL_DATABASE: e1i5
       MYSQL_ROOT_PASSWORD: 1234
     ports:
-      - "3306:3306"
+      - '3306:3306'
   api:
     build:
       context: ./
@@ -14,9 +14,9 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - DATABASE_URL=mysql://root:1234@localhost:3306/e1i5
+      - DATABASE_URL=mysql://root:1234@db:3306/e1i5
     ports:
-      - "3000:3000"
+      - '3000:3000'
     restart: always
     volumes:
       - ./src/:/src/

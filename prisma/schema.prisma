@@ -21,6 +21,7 @@ model Profile {
   name      String
   url       String   @unique
   description String
+  userId    Int
   tabs      Tab[]
 }
 
