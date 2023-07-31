@@ -10,7 +10,6 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
   setupSwagger(app);
-  app.useGlobalPipes(new ValidationPipe());
   await app.listen(PORT);
 }
 bootstrap();
