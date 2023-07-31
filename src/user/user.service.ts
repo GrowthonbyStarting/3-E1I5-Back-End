@@ -10,13 +10,12 @@ export class UserService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { email, password, confirmPassword } = createUserDto;
+    const { email, password } = createUserDto;
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
 
     if (existingUser) throw new BadRequestException(`User(${email}) is exist.`);
-    if (password !== confirmPassword) throw new BadRequestException(`비밀번호를 확인해주세요`);
 
     const hashedPassword = await bcrypt.hash(password, 5);
 
@@ -41,9 +40,9 @@ export class UserService {
     const validatePassword = await bcrypt.compare(password, user.password);
 
     if (!validatePassword) {
-      throw new BadRequestException();
+      throw new BadRequestException({ message: '비밀번호를 확인해 주세요' });
     }
-    const payload = { username: user.id };
+    const payload = { id: user.id };
     return {
       access_token: await this.jwtService.signAsync(payload),
     };

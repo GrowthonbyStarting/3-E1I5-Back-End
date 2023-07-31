@@ -14,7 +14,7 @@ export class UserController {
     return this.userService.create(createUserDto);
   }
 
-  @Post('api/login')
+  @Post('api/sign-in')
   @ApiOperation({ summary: '로그인 API', description: '로그인' })
   login(@Body() signInDto: SignInDto) {
     return this.userService.login(signInDto);
