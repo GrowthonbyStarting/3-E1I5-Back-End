@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { UserService } from './user.service';
-import { CreateUserDto, SignInDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { SignInDto } from './dto/signin-user.dto';
 
 @Controller('user')
 export class UserController {
