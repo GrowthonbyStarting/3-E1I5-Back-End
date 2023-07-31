@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ProfileController } from '../controllers';
-import { ProfileService } from '../services';
+import { ProfileController } from './profile.controller';
+import { ProfileService } from './profile.service';
 import { PrismaService } from '../libs/orm';
 
 @Module({

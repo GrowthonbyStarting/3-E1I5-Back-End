@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Req } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { ProfileService } from '../services/profile.service';
-import { RegisterProfileDto } from '../dto';
+import { ProfileService } from './profile.service';
+import { RegisterProfileDto } from './dto';
 
 @Controller('/profiles')
 @ApiTags('Profile')

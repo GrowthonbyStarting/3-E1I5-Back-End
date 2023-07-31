@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './controllers';
-import { AppService } from './services';
-import { ProfileModule } from './modules';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { ProfileModule } from './profile';
 
 @Module({
   imports: [ProfileModule],
