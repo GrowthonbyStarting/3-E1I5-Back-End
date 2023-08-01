@@ -1,4 +1,6 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { ApiProperty } from '@nestjs/swagger';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class RegisterProfileDto {

@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:18
 
 WORKDIR /
 
@@ -10,7 +10,6 @@ ARG NODE_ENV
 ARG PORT
 
 COPY . .
-
 RUN npm run prisma:generate
 
 CMD ["npm", "run", "start:dev"]
