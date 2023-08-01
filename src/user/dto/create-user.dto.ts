@@ -18,7 +18,6 @@ export class CreateUserDto {
   readonly password: string;
 
   @IsNotEmpty()
-  @match('password')
   @ApiProperty({
     example: 'abcd1234#',
     description: '비밀번호 확인',
