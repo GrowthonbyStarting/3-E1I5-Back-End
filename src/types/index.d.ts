@@ -1,5 +1,9 @@
 declare interface Request {
   state: {
-    userId?: number;
+    user?: {
+      id: number;
+      email: string;
+      password: string;
+    };
   };
 }

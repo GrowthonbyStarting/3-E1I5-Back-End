@@ -29,5 +29,6 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty({ example: 'https://www.naver.com', description: 'url', required: true })
   url: string;
 }

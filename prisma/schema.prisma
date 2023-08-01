@@ -32,4 +32,5 @@ model Tab {
   info     Json
   profile  Profile  @relation(fields: [profileId], references: [id])
   profileId Int
+  @@unique([profileId, type])
 }
