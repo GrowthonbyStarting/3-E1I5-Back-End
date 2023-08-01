@@ -1,7 +1,9 @@
+import { equals } from 'class-validator';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/libs/orm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { badRequest } from '../libs/exception/exceptions';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin-user.dto';
 
@@ -10,14 +12,15 @@ export class UserService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { email, password } = createUserDto;
+    const { email, password, confirmPassword } = createUserDto;
     const existingUser = await this.prisma.user.findUnique({
       where: { email },
     });
 
-    if (existingUser) throw new BadRequestException(`User(${email}) is exist.`);
+    if (existingUser) throw badRequest(`User(${email}) is exist.`);
 
-    const hashedPassword = await bcrypt.hash(password, 5);
+    const SALT = parseInt(process.env.SALT);
+    const hashedPassword = await bcrypt.hash(password, SALT);
 
     const user = await this.prisma.user.create({
       data: {
@@ -40,7 +43,9 @@ export class UserService {
     const validatePassword = await bcrypt.compare(password, user.password);
 
     if (!validatePassword) {
-      throw new BadRequestException({ message: '비밀번호를 확인해 주세요' });
+      throw badRequest(`password(${password}) is not equal.`, {
+        errorMessage: '이메일이나 비밀번호를 확인해주세요.',
+      });
     }
     const payload = { id: user.id };
     return {
