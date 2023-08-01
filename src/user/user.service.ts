@@ -38,7 +38,10 @@ export class UserService {
       where: { email },
     });
 
-    if (!user) throw new BadRequestException();
+    if (!user)
+      throw badRequest(`password(${password}) is not equal.`, {
+        errorMessage: '이메일이나 비밀번호를 확인해주세요.',
+      });
 
     const validatePassword = await bcrypt.compare(password, user.password);
 
