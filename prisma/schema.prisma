@@ -18,9 +18,9 @@ model User {
 
 model Profile {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      String?
   url       String   @unique
-  description String
+  description String?
   userId    Int
   tabs      Tab[]
 }

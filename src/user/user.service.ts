@@ -1,5 +1,4 @@
-import { equals } from 'class-validator';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/libs/orm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -12,21 +11,26 @@ export class UserService {
   constructor(private prisma: PrismaService, private jwtService: JwtService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { email, password, confirmPassword } = createUserDto;
-    const existingUser = await this.prisma.user.findUnique({
-      where: { email },
-    });
+    await this.prisma.$transaction(async (prisma) => {
+      const { email, password, url } = createUserDto;
+      const existingUser = await this.prisma.user.findUnique({
+        where: { email },
+      });
 
-    if (existingUser) throw badRequest(`User(${email}) is exist.`);
+      if (existingUser) throw badRequest(`User(${email}) is exist.`);
 
-    const SALT = parseInt(process.env.SALT);
-    const hashedPassword = await bcrypt.hash(password, SALT);
+      const SALT = Number(process.env.SALT);
+      const hashedPassword = await bcrypt.hash(password, SALT);
 
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        password: hashedPassword,
-      },
+      const user = await prisma.user.create({
+        data: {
+          email,
+          password: hashedPassword,
+        },
+      });
+      await prisma.profile.create({
+        data: { url, userId: user.id },
+      });
     });
     return { result: '회원가입 성공' };
   }
@@ -39,7 +43,7 @@ export class UserService {
     });
 
     if (!user)
-      throw badRequest(`password(${password}) is not equal.`, {
+      throw badRequest(`user(${email}) is not exist.`, {
         errorMessage: '이메일이나 비밀번호를 확인해주세요.',
       });
 
