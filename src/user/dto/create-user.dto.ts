@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { match } from 'assert';
-import { Equals, equals, IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString, Matches } from 'class-validator';
+import { Match } from '../../libs/class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -18,10 +18,17 @@ export class CreateUserDto {
   readonly password: string;
 
   @IsNotEmpty()
+  @IsString()
+  @Match('password', { message: '비밀번호가 일치하지 않습니다.' })
   @ApiProperty({
     example: 'abcd1234#',
     description: '비밀번호 확인',
     required: true,
   })
   readonly confirmPassword: string;
+
+  @IsNotEmpty()
+  @IsString()
+  @ApiProperty({ example: 'https://www.naver.com', description: 'url', required: true })
+  url: string;
 }
