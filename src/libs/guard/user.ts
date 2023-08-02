@@ -11,7 +11,7 @@ export class UserGuard implements CanActivate {
   async canActivate(context: ExecutionContext) {
     const req = context.switchToHttp().getRequest();
 
-    const { accessToken } = req.header.authorization;
+    const accessToken = req.headers.authorization;
     if (accessToken) {
       try {
         const [type, token] = accessToken.split(' ');
@@ -19,14 +19,19 @@ export class UserGuard implements CanActivate {
           throw unauthorized(`Token type(${type}) is not 'Bearer'`, { errorMessage: '토큰 타입이 잘못 되었습니다.' });
         }
         const { id } = await this.jwtService.verifyAsync(token, { secret: process.env.JWT_SECRET });
-        const user = await this.prisma.user.findUnique({ where: { id } });
-        req.status = { user };
+        if (id) {
+          const user = await this.prisma.user.findUnique({ where: { id: Number(id) } });
+          req.state = { user };
+        } else {
+          req.state = {};
+        }
         return true;
       } catch (err) {
         console.error(err);
       }
+    } else {
+      req.state = {};
     }
-    req.status = {};
     return true;
   }
 }
