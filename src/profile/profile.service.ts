@@ -32,4 +32,11 @@ export class ProfileService {
       });
     });
   }
+
+  async retrieve({ url }: { url: string }) {
+    return this.prisma.profile.findUnique({
+      where: { url },
+      include: { tabs: true },
+    });
+  }
 }
