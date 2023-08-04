@@ -1,7 +1,7 @@
 import { Global, Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { PrismaService } from 'prisma/prisma.service';
 import { UserGuard } from './user';
-import { PrismaService } from '../orm';
 
 @Global()
 @Module({

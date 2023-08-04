@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { PrismaService } from 'src/libs/orm';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from '../security/passport.jwt.strategy';
@@ -8,7 +7,7 @@ import { UserController } from './user.controller';
 
 @Module({
   controllers: [UserController],
-  providers: [UserService, PrismaService, JwtStrategy],
+  providers: [UserService, JwtStrategy],
   imports: [
     PassportModule,
     JwtModule.register({

@@ -11,9 +11,10 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Profile` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `name` VARCHAR(191) NOT NULL,
+    `name` VARCHAR(191) NULL,
     `url` VARCHAR(191) NOT NULL,
-    `description` VARCHAR(191) NOT NULL,
+    `description` VARCHAR(191) NULL,
+    `userId` INTEGER NOT NULL,
 
     UNIQUE INDEX `Profile_url_key`(`url`),
     PRIMARY KEY (`id`)
@@ -27,6 +28,7 @@ CREATE TABLE `Tab` (
     `info` JSON NOT NULL,
     `profileId` INTEGER NOT NULL,
 
+    UNIQUE INDEX `Tab_profileId_type_key`(`profileId`, `type`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

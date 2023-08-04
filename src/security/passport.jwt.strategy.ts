@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ExtractJwt, Strategy, VerifiedCallback } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
-import { PrismaService } from 'src/libs/orm';
+import { PrismaService } from '../../prisma/prisma.service';
 
 type Payload = {
   id: number;

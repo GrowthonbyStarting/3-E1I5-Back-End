@@ -1,5 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Request } from 'express';
 import { ProfileService } from './profile.service';
 import { UpdateProfileBodyDto } from './dto';
 import { UserGuard } from '../libs/guard';
@@ -18,7 +20,7 @@ export class ProfileController {
   @Get('/:url')
   @UseGuards(UserGuard)
   async retrieve(@Req() req: Request, @Param('url') url: string) {
-    const userId = req.state.user?.id;
+    const userId = req.body.user?.id;
     const profile = await this.profileService.retrieve({ url });
     return {
       profile,
