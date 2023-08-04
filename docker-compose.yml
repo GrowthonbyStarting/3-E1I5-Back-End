@@ -15,7 +15,7 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - DATABASE_URL=mysql://root:1234@3-e1i5-back-end-db-1:3307/e1i5
+      - DATABASE_URL=mysql://root:1234@db:3307/e1i5
       - MYSQL_CHARSET=utf8mb4
       - SALT=1
       - JWT_SECRET=????
