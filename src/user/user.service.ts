@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'prisma/prisma.service';
+import { User } from '@prisma/client';
 import { badRequest } from '../libs/exception/exceptions';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin-user.dto';
@@ -58,5 +59,13 @@ export class UserService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async find(user: User) {
+    const info = await this.prisma.user.findUnique({
+      where: { id: user.id },
+    });
+    delete info.password;
+    return info;
   }
 }
