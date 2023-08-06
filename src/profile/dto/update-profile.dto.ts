@@ -28,6 +28,9 @@ class TabDto {
     required: true,
   })
   info: Record<string, any>;
+
+  @IsOptional()
+  imageToUpload?: Express.Multer.File[];
 }
 
 export class UpdateProfileBodyDto {
@@ -59,6 +62,9 @@ export class UpdateProfileBodyDto {
   })
   @IsOptional()
   tabs?: TabDto[];
+
+  @IsOptional()
+  imageToUpload?: Express.Multer.File[];
 }
 
 export class UpdateProfileParamDto {

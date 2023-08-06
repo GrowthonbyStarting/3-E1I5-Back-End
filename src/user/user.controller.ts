@@ -4,7 +4,6 @@ import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { GetUser } from 'src/decorator/get-user.decorator';
 import { AuthGuard } from '@nestjs/passport';
-import { UserGuard } from '../libs/guard/user';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin-user.dto';
