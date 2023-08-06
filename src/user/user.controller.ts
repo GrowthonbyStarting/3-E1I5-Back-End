@@ -1,5 +1,9 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { User } from '@prisma/client';
+import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { GetUser } from 'src/decorator/get-user.decorator';
+import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { SignInDto } from './dto/signin-user.dto';
@@ -19,5 +23,12 @@ export class UserController {
   @ApiOperation({ summary: '로그인 API', description: '로그인' })
   login(@Body() signInDto: SignInDto) {
     return this.userService.login(signInDto);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  @Get('')
+  @UseGuards(AuthGuard('jwt'))
+  find(@GetUser() user: User) {
+    return this.userService.find(user);
   }
 }
