@@ -1,11 +1,6 @@
-import { CreateMultipartUploadOutputFilterSensitiveLog } from '@aws-sdk/client-s3';
 import { Injectable } from '@nestjs/common';
-import { profile } from 'console';
-import { connect } from 'http2';
-import { userInfo } from 'os';
 import { PrismaService } from 'prisma/prisma.service';
 import { ImagesService } from 'src/image/images.service';
-import { ImagesModule } from '../image/images.module';
 import { UpdateProfileBodyDto } from './dto';
 
 @Injectable()
@@ -37,7 +32,6 @@ export class ProfileService {
         },
       },
     });
-    console.log(profileImage);
     return profile;
   }
 
