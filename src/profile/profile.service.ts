@@ -15,21 +15,21 @@ export class ProfileService {
         name: data.name,
         image: { connect: { id: profileImage.id } },
         description: data.description,
-        tabs: data.tabs && {
-          upsert: data.tabs.map((tab) => ({
-            where: { profileId_type: { profileId: id, type: tab.type } },
-            create: {
-              title: tab.title,
-              type: tab.type,
-              info: tab.info,
-            },
-            update: {
-              title: tab.title,
-              type: tab.type,
-              info: tab.info,
-            },
-          })),
-        },
+        // tabs: data.tabs && {
+        //   upsert: data.tabs.map((tab) => ({
+        //     where: { profileId_type: { profileId: id, type: tab.type } },
+        //     create: {
+        //       title: tab.title,
+        //       type: tab.type,
+        //       info: tab.info,
+        //     },
+        //     update: {
+        //       title: tab.title,
+        //       type: tab.type,
+        //       info: tab.info,
+        //     },
+        //   })),
+        // },
       },
     });
     return profile;

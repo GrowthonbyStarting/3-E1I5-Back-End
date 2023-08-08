@@ -33,11 +33,12 @@ export class ProfileController {
   @Get('/:url')
   @UseGuards(UserGuard)
   async retrieve(@Req() req: Request, @Param('url') url: string) {
-    const userId = req.body.user?.id;
+    // const userId = req.body.user?.id;
+    // console.log(req);
     const profile = await this.profileService.retrieve({ url });
     return {
       profile,
-      isMine: profile.userId === userId,
+      // isMine: profile.userId === userId,
     };
   }
 }
