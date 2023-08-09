@@ -19,11 +19,13 @@ export class TabDto {
   @IsObject()
   @IsNotEmpty()
   @ApiProperty({
-    example: {
-      start: '2023-01-01',
-      end: '2023-08-01',
-      description: '숨쉬기',
-    },
+    example: [
+      {
+        start: '2023-01-01',
+        end: '2023-08-01',
+        description: '숨쉬기',
+      },
+    ],
     description: 'tab info',
     required: true,
   })

@@ -1,6 +1,6 @@
 import { profile } from 'console';
 import { Body, Controller, Delete, Get, Param, Patch } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { TabService } from './tab.service';
 import { TabDto } from './tab.dto';
 
@@ -15,6 +15,10 @@ export class TabController {
   }
 
   @Patch('/:id')
+  @ApiOperation({
+    summary: '유저 tab정보 API',
+    description: '유저 tab정보를 update합니다.',
+  })
   async update(@Body() tabs: TabDto[], @Param('id') id: number) {
     return this.tabService.updateProfileTabs(tabs, +id);
   }

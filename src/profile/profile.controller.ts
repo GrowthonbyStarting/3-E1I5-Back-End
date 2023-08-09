@@ -25,13 +25,17 @@ export class ProfileController {
 
   @Patch('/:id')
   @UseInterceptors(FileInterceptor('file'))
-  @ApiOperation({ summary: '프로필 업데이트 API', description: '프로필, 탭을 업데이트한다.' })
+  @ApiOperation({ summary: '프로필 업데이트 API', description: '프로필을 업데이트한다.' })
   async update(@Body() body: UpdateProfileBodyDto, @Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
     return this.profileService.update({ id: Number(id), data: body, file });
   }
 
   @Get('/:url')
   @UseGuards(UserGuard)
+  @ApiOperation({
+    summary: '유저 정보 API',
+    description: '저장된 프로필, 탭을 보여준다.',
+  })
   async retrieve(@Req() req: Request, @Param('url') url: string) {
     // const userId = req.body.user?.id;
     // console.log(req);

@@ -1,7 +1,6 @@
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as path from 'path';
 import { AppModule } from './app.module';
 import { PORT } from './config';
 import { HttpExceptionFilter } from './libs/exception';
